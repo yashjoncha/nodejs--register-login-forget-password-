@@ -14,7 +14,7 @@ let users = [];
 
 // Routes
 // User Registration
-app.get('/register', (req, res) => {
+app.get('/', (req, res) => {
     res.render('register');
 });
 
@@ -28,7 +28,7 @@ app.post('/register', (req, res) => {
     // Create new user
     const newUser = { email, username, password };
     users.push(newUser);
-    res.send('User registered successfully.');
+    res.render("sucesslogin");
 });
 
 // User Login
@@ -40,7 +40,8 @@ app.post('/login', (req, res) => {
     const { username, password } = req.body;
     const user = users.find(user => user.username === username && user.password === password);
     if (!user) {
-        return res.status(401).send('Invalid username or password.');
+        return res.render('invalid-login.ejs');
+
     }
     res.send('Login successful.');
 });
